@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+{% block title %} Search Page {% endblock %}
+
+{% block css %}
+<style>
+    body{
+        background-color: #d4e8ee;
+    }
+    .img{
+        min-height: 60vh;
+
+    }
+    .img::before{
+        content: '';
+        min-height: 75vh;
+        width: 100%;
+        position: absolute;
+        top: 11vh;
+        margin-left: 0;
+        /*abackground: url('/static/img/search.jpg') no-repeat center/cover; */
+    }
+
+    
+    .card{
+        background-color: #b8e0eb;
+        height: 50%;
+        width: 50%;
+        margin-left: 100px;
+        margin: 10.5rem 0;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid img">
+    <div class="container">
+        <div class="card p-2 mx-auto">
+            <h3 class="text-center">Search Service Provider</h3>
+            
+            <form action="" method="POST">
+                {% csrf_token %}
+
+                <div class="form-group m-2">
+                    <label> Select the City: </label>
+                    <select class="form-select" aria-label="Cities", name="city">
+                        <option value="none">Select a City</option>
+
+                        {% for i in city %}
+                        <option value="{{i.id}}">{{i}}</option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+
+                <div class="form-group m-2">
+                    <label> Select the Service: </label>
+
+                    <select class="form-select" aria-label="Service" name="service">
+                        <option value="none">Select a Service</option>
+
+                        {% for i in service %}
+                        <option value="{{i.service_id}}">{{i}}</option>
+                        {% endfor %}
+
+                    </select>
+                </div>
+                <div>
+
+                    <button type="submit" class="btn btn-primary m-3" >Search</button>
+                </div>
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+</div>
+
+{% endblock %}

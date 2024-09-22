@@ -1,0 +1,272 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Home {% endblock title %}
+
+{% block css %}
+<style>
+  .about-us {
+    list-style: none;
+  }
+
+  .about-us li:before {
+    content: '✓';
+    color: green;
+    margin-right: 25px;
+    font-weight: bolder;
+  }
+
+  #cardRow {
+    justify-content: space-around;
+  }
+</style>
+{% endblock %}
+{% block body %}
+
+
+<!--slider-->
+<div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel" data-interval="1000">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active"
+      aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="{% static 'img/banner2.jpg' %}" class="d-block w-100" style="opacity:0.7;" alt="First slide"
+        height="450px;">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 style="color:black; font-size:40px; margin-top: -25%; font-family: 'Roboto Slab', serif;">Making your Home
+          Shine and Spotless Is Our Business And Priority</h5>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/bannerm.png' %}" class="d-block w-100" style="opacity:0.7;" alt="Second slide"
+        height="450px;">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 style="color: black; font-size:40px; margin-top: -25%; font-family: 'Roboto Slab', serif;"> A quick solution
+          to your everyday problems</h5>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="{% static 'img/banner5.png' %}" class="d-block w-100" style="opacity:0.7;" alt="Third slide"
+        height="450px;">
+      <div class="carousel-caption d-none d-md-block">
+        <h5 style="color: black; font-size:40px; margin-top: -25%; font-family: 'Roboto Slab', serif;">High-quality
+          workmanship at great prices</h5>
+      </div>
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+<!--end of slider-->
+
+<section id="aboutus" class="container my-3">
+  <div>
+    <h2>About Us</h2>
+    <hr>
+    <h2>Who We Are?</h2>
+  </div>
+  <div class="row d-flex">
+    <div class="col-md-8">
+      <p>Ghar Sewa is a service based website providing house maintenance services with highest quality work from
+        experienced technicians. It provides different types of services like plumber, electrician, bathroom repair,
+        furniture repair etc. Customers can find his/her service provider in just a click and he/she will be at
+        customer’s door. With complete profiles of professionals, including their work details, service information and
+        reviews; customer can be sure of hiring the right service professional each and every time at Ghar Sewa.</p>
+    </div>
+    <div class="col-md-4">
+      <p>How amazing would it be if you had all your home related problems solved in just a few minutes? Right from
+        remodeling your living space to home services can be delivered to your doorstep. All you need is to find some
+        home services online and say goodbye to all your home related problems.
+        <br>
+        That's where we come in to aid you in every possible way to make your daily life easier.
+      </p>
+    </div>
+    <div class=" card col-md-12 mt-4" style="border-style: none;">
+      <a href="/about" class="btn btn-outline-primary m-auto">More Info</a></a>
+    </div>
+  </div>
+</section>
+
+<div class="container">
+  <hr style="height: 3px;">
+</div>
+
+<!--Services-->
+<div class="services">
+  <h4 class="text-center">Our Services</h4>
+  <h3 class="text-center">What We Offer?</h3>
+  <div class="container mt-5">
+    <div class="row">
+      <div class="col-md-4 d-flex align-items-center justify-content-center"
+        style="background-image: url(static/img/service.jpg); color: white; background-size: 100% 100%; ">
+        <h4 class="text-center">Services that you need we will provide at your door step</h4>
+      </div>
+
+      <div class="col-md-8">
+        <div class="row" id="cardRow">
+          {% for item in services.all|slice:"0:6" %}
+          <div class="col-md-4">
+            <a href="/services/{{item.service_id}}">
+              <div class="card mt-2 mb-2" style="border-style: none; box-shadow: 4px 4px 6px grey;;">
+                <img src="{{item.image.url}}" class="card-img-top mx-auto" alt="{{item.service_name}}"
+                  style="width: 100px; height: 100px;">
+                <div class="card-body">
+                  <h5 class="card-title text-center">{{item.service_name}}</h5>
+                </div>
+              </div>
+            </a>
+          </div>
+          {% endfor %}
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class=" card col-md-12 mt-4" style="border-style: none;">
+    <a href="/services" class="btn btn-outline-primary m-auto">All Services</a></a>
+  </div>
+</div>
+
+<!--Services end-->
+
+<div class="container">
+  <hr style="height: 3px;">
+</div>
+
+<!--Why us-->
+<div class="whyus"></div>
+<div class="container mt-3 mb-3" style="background-image: url(static/img/about.jpg);">
+  <div class="row">
+    <div class="col-md-5 text-center" style="margin-top: 150px;">
+      <h1 style="font-size: 50px; font-weight: bold; color:white;">Why</h1>
+      <h3 style="font-size: 30px; font-weight: bold; color: white;">Choose Us ?</h3>
+    </div>
+    <div class="col-md-7 mx-auto">
+
+      <h4 class="text-center mt-2 mb-3" style="color: white;">One Stop Solution for your Complete Home Maintenance.</h4>
+      <div class="row">
+        <div class="col-md-6 col-sm-6">
+          <div class="card mb-4">
+            <div class="row no-gutters">
+              <div class="col-md-6">
+                <img class="card-img-top" src="{% static 'img/et.png' %}" alt="Expert Technician"
+                  style="width: 100px; height: 100px; margin-left: 30px;">
+              </div>
+              <div class="col-md-6">
+                <div class="card-body">
+                  <h5 class="card-title mt-3 text-center">Expert Technician</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+          <div class="card mb-4">
+            <div class="row no-gutters">
+              <div class="col-md-6">
+                <img class="card-img-top" src="{% static 'img/clock.jpg' %}" alt="24/7 services"
+                  style="width: 100px; height: 100px; margin-left: 30px;">
+              </div>
+              <div class="col-md-6">
+                <div class="card-body">
+                  <h5 class="card-title mt-3 text-center">24/7 Services</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6">
+          <div class="card mb-4" >
+            <div class="row no-gutters">
+              <div class="col-md-6">
+                <img class="card-img-top" src="{% static 'img/guarn.png' %}" alt="Service Guarantee"
+                  style="width: 100px; height: 100px; margin-left: 30px;">
+              </div>
+              <div class="col-md-6">
+                <div class="card-body">
+                  <h5 class="card-title mt-3 text-center">Service Guarantee</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+          <div class="card mb-4" >
+            <div class="row no-gutters">
+              <div class="col-md-6">
+                <img class="card-img-top" src="{% static 'img/price.jpg' %}" alt="Affordable Price"
+                  style="width: 100px; height: 100px; margin-left: 30px;">
+              </div>
+              <div class="col-md-6">
+                <div class="card-body">
+                  <h5 class="card-title mt-3 text-center">Affordable Price</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-6 col-sm-6">
+          <div class="card mb-4" >
+            <div class="row no-gutters">
+              <div class="col-md-6">
+                <img class="card-img-top" src="{% static 'img/hand.png' %}" alt="Hassle Free Services"
+                  style="width: 100px; height: 100px;  margin-left: 30px;">
+              </div>
+              <div class="col-md-6">
+                <div class="card-body">
+                  <h5 class="card-title mt-3 text-center">Hassle Free Services</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-sm-6">
+          <div class="card mb-4" >
+            <div class="row no-gutters">
+              <div class="col-md-6">
+                <img class="card-img-top" src="{% static 'img/price.jpg' %}" alt="Affordable Price"
+                  style="width: 100px; height: 100px; margin-left: 30px;">
+              </div>
+              <div class="col-md-6">
+                <div class="card-body">
+                  <h5 class="card-title mt-3 text-center">Affordable Price</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+</div>
+
+<!--Why us end-->
+
+<div class="slogan container my-4 text-center p-4">
+
+  <h6 style="text-transform: uppercase;">A place for all your needs.</h6>
+  <q>From attics to basements, everything in between, We care to fix it right</q>
+
+  <div class="mt-2">
+    <h3><em>- Ghar Sewa</em></h3>
+    <a href="{% url 'contact' %}" class="btn btn-outline-primary">Contact Us</a>
+  </div>
+
+</div>
+{% endblock body %}

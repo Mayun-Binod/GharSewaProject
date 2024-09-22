@@ -1,0 +1,129 @@
+  
+{% extends 'base.html' %}
+{% load static %}
+{% block title %} Admin {% endblock title %}
+{% block css %}
+<style>
+    a{
+        text-decoration: none;
+    }
+    .table{
+        border: 1px solid rgb(3, 3, 3);
+        border-radius: 20px;
+    }
+    .col{
+        border: 1px solid grey;
+
+    }
+    h2, h3{
+        font-family: cursive;
+    }
+    
+</style>
+{% endblock %}
+
+
+{% block body%}
+
+<div class="container mt-3">
+    <div>
+        <h2 class="text-center"><a href="/" class="text-dark"> Services</a></h2>
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" class="col">S.No</th>
+                    <th scope="col" class="col">Name</th>
+                    <td></td>
+                    <th scope="col">Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in services %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td class="col">{{i.service_name}}</td>
+                    <td></td>
+                    <td>{{i.service_desc|slice:'0:50'}}...</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td scope="row" class="text-center" colspan="4"><h3 class="text-primary">Total :: {{total_services}} services</h3></td>
+                </tr>
+
+            </tbody>
+        </table>
+    </div>
+
+    <hr>
+
+    <div>
+        <h2 class="text-center"><a href="/" class="text-dark">All Services Man</a></h2>
+
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col" class="col">Username</th>
+                    <th scope="col" class="col">First Name</th>
+                    <th scope="col" class="col">Last Name</th>
+                    <th scope="col" class="col">Email</th>
+                    <th scope="col" class="col">Service</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in users %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td class="col">{{i.user.username}}</td>
+                    <td class="col">{{i.user.first_name}}</td>
+                    <td class="col">{{i.user.last_name}}</td>
+                    <td class="col">{{i.user.email}}</td>
+                    <td class="col">{{i.service}}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td scope="row" class="text-center " colspan="6"><h3 class="text-primary">Total :: {{total_users}} Service Man</h3></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+<hr>
+    <div>
+        <h2 class="text-center"><a href="/" class="text-dark"> All Customers</a></h2>
+
+
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col" class="col">S.No</th>
+                    <th scope="col" class="col">Username</th>
+                    <th scope="col" class="col">First Name</th>
+                    <th scope="col" class="col">Last Name</th>
+                    <th scope="col" class="col">Email</th>
+                    <th scope="col" class="col">Addres</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in customers %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td class="col">{{i.user.username}}</td>
+                    <td class="col">{{i.user.first_name}}</td>
+                    <td class="col">{{i.user.last_name}}</td>
+                    <td class="col">{{i.user.email}}</td>
+                    <td class="col">{{i.address}}</td>
+                </tr>
+                {% endfor %}
+                <tr>
+                    <td scope="row" class="text-center " colspan="6"><h3 class="text-primary">Total :: {{total_customers}} Customers</h3></td>
+                </tr>
+                
+            </tbody>
+        </table>
+    </div>
+</div>
+<hr>
+{% endblock body %}

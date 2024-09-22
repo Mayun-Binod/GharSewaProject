@@ -1,0 +1,130 @@
+{% extends 'admin/admin_nav.html' %}
+
+{% block css%}
+<style>
+    .img-part {
+        position: relative;
+        height: 40vh;
+    }
+
+    .img-part::before {
+        position: absolute;
+        content: '';
+        background: url(/static/img/kathmandu.jpg) no-repeat;
+        background-size: cover;
+        height: 100%;
+        width: 100%;
+        transition: all 0.1s ease-in-out;
+        z-index: -41;
+        opacity: 0.8;
+    }
+
+
+    .img-part div {
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .img-part div h1 {
+        text-shadow: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        line-height: 1.65;
+        font-weight: bold;
+        font-family: monospace;
+        padding: 0.5rem;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="img-part">
+        <div>
+            <h1 class="">"City Lists"</h1>
+
+        </div>
+
+    </div>
+    <div class="container my-3">
+        <button class="btn btn-sm btn-primary" id="addCity"> Add City</button>
+        <div class="w-50 mx-auto"> {% include 'messages.html' %}</div>
+        <div class="row" id="locations">
+
+            <table class="table mx-auto w-50 table-bordered table-hover">
+                <thead class="table-dark">
+                    <tr>
+                        <th scope="col">S.N</th>
+                        <th scope="col">City Location</th>
+                        <th>
+                            <center>Action</center>
+                        </th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in cities %}
+                    <tr>
+                        <th scope="row">{{forloop.counter}}</th>
+                        <td>{{i.city}}</td>
+                        <td>
+                            <center><a href="{% url 'delete_city' i.id %}"><button class="btn btn-sm btn-danger"
+                                        onclick="return confirm('Are you sure ?')"><i
+                                            class="fa fa-trash"></i></button></a></center>
+
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                    <caption>* City Locations</caption>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="row hidden mx-auto w-50" id="city">
+            <div class="card p-0">
+                <div class="card-header bg-dark">
+                    <h3 class="text-white text-center"> Add City </h3>
+                </div>
+                <div class="card-body p-2">
+                    <form action="" method="POST" class="mx-auto w-50 my-2 p-2">
+
+
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label>Enter City Name:: </label>
+                            <input type="text" name="city" placeholder="Enter City" required>
+
+                        </div>
+                        <button type="submit" class="btn btn-sm btn-outline-success m-2">Add City</button>
+                        <a class="btn btn-sm btn-outline-success m-2" href="{% url 'city_list' %}">Cancel</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js%}
+<script>
+
+    var addCity = document.getElementById('addCity');
+    addCity.onclick = function () {
+        var locations = document.getElementById('locations')
+        var city = document.getElementById('city')
+
+        locations.classList.add('hidden')
+        city.classList.remove('hidden')
+    }
+</script>
+{% endblock %}

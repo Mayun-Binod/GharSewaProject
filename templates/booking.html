@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block title %} Booking {% endblock %}
+{% block body %}
+<div class="container mt-3">
+    <div class="card">
+        <div class="card-header">
+            <h3 class="text-center">Service and Service Provider to be booked:: </h3>
+        </div>
+        <div class="card-body row">
+            <div class="col-md-4">
+                <h6 class="text-danger"><u> Service details</u></h6>
+                <h2 class="card-title">{{serv.service.service_name}}</h2>
+            </div>
+            <div class="col-md-1 m-3">
+                <h1> => </h1>
+            </div>
+            <div class="col-md-6 p-0 m-0">
+                <h6 class="text-danger"><u> Service Provider details</u></h6>
+                <p class="m-0">Full Name: {{serv.user.first_name}} {{serv.user.last_name}}</p>
+                <p class="m-0">Contact: {{serv.phone}}</p>
+                <p class="m-0">Address: {{serv.address}}</p>
+                <p class="m-0">Experience: {{serv.experience}}</p>
+            </div>
+
+
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="col-md-8">
+
+
+    </div>
+
+    <hr>
+    <div>
+        <h4>Please Fill Up The Booking Details</h4>
+        <hr>
+
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="form-group mt-2">
+                <label>Name</label>
+                <input type="text" class="form-control" name="name" placeholder="Enter Name" value="{{customer.user.first_name}} {{customer.user.last_name}}" required>
+            </div>
+            <div class="form-group my-2">
+                <label>Contact</label>
+                <input type="tel" class="form-control" name="phone" placeholder="Enter Phone" value="{{customer.phone}}" required>
+            </div>
+            <div class="form-group">
+                <label>Address</label>
+                <input type="text" class="form-control" name="address" placeholder="Enter address" required>
+            </div>
+            <div class="form-group mt-2">
+                <div class="row">
+                    <div class="col">
+                        <label>Date</label>
+                        <input type="date" class="form-control" name="date" placeholder="Enter Date" required>
+                    </div>
+                    <div class="col">
+                        <label>Day</label>
+                        <select class="form-control" name="day" required>
+                            <option>Select Days</option>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>4</option>
+                            <option>7</option>
+                            <option>15</option>
+                            <option>30</option>
+
+                        </select>
+                    </div>
+                    <div class="col">
+                        <label>Hour</label>
+                        <select class="form-control" name="hour" required>
+                            <option>Select Hours</option>
+                            <option>1-2</option>
+                            <option>2-4</option>
+                            <option>4-6</option>
+                            <option>6-8</option>
+                        </select>
+                    </div>
+                </div>
+
+            </div>
+            <div class="form-group my-2">
+                <button type="submit" class="btn btn-outline-primary" onclick="booked()">Book Now</button>
+                <button type="reset" class="btn btn-outline-danger">Reset</button>
+
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
+{% block js %}
+<script>
+    function booked() {
+        alert('The service has been booked!!!')
+        window.location = ''
+    }
+</script>
+{% endblock %}

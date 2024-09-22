@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block title %} Booking Status {% endblock %}
+
+{% block css %}
+<style>
+
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid cover-height">
+
+    {% if not request.user %}
+    <div class="container my-3">
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Service and Service Provider to be booked:: </h3>
+            </div>
+            <div class="card-body row">
+                <div class="col-md-4">
+                    <h6 class="text-danger"><u> Service details</u></h6>
+                    <h2 class="card-title">{{book.user.service.service_name}}</h2>
+
+
+                </div>
+                <div class="col-md-1 m-3">
+                    <h1> ==> </h1>
+                </div>
+                <div class="col-md-2">
+                    <img src="{{book.customer.image.url}}" alt="Customer Image" width="150px" height="150px">
+                </div>
+                <div class="col-md-4 p-0 m-0">
+                    <h6 class="text-danger"><u> Cutomers Provider details</u></h6>
+                    <p class="m-0">Full Name: {{book.customer.user.first_name}} {{book.customer.user.last_name}}</p>
+                    <p class="m-0">Contact: {{book.customer.phone}}</p>
+                    <p class="m-0">Address: {{book.customer.address}}</p>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+    {% else %}
+
+    <div class="container my-3">
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Service and Service Provider to be booked:: </h3>
+            </div>
+            <div class="card-body row">
+                <div class="col-md-4">
+                    <h6 class="text-danger"><u> Service details</u></h6>
+                    <h2 class="card-title">{{book.user.service.service_name}}</h2>
+
+
+                </div>
+                <div class="col-md-1 m-3">
+                    <h1> ==> </h1>
+                </div>
+                <div class="col-md-2">
+                    <img src="{{book.user.image.url}}" alt="Customer Image" width="150px" height="150px">
+                </div>
+                <div class="col-md-4 p-0 m-0">
+                    <h6 class="text-danger"><u> Service Provider details</u></h6>
+                    <p class="m-0">Full Name: {{book.user.user.first_name}} {{book.user.user.last_name}}</p>
+                    <p class="m-0">Contact: {{book.user.phone}}</p>
+                    <p class="m-0">Address: {{book.user.address}}</p>
+                    <p class="m-0">Experience: {{book.user.experience}} years</p>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    {% endif %}
+    <div class="container my-3">
+
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Booking Details </h3>
+            </div>
+            <div class="card-body row">
+
+                <div class="text-center">
+                    <p>Booking Date: {{book.book_date}}</p>
+                    <p>Booking_Days: {{book.book_days}} days</p>
+                    <p>Booking_Hours : {{book.book_hours}} hours</p>
+                    <p class="m-0">Price: Rs. 1000 </p>
+                    <p class="m-0 text-grey">*Price may defer according to Service Providers!</p>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

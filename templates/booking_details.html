@@ -1,0 +1,193 @@
+{% extends 'base.html' %}
+
+{% block title %} Booking Details {% endblock %}
+{% block css %}
+<style>
+    .container {
+        min-height: 80vh;
+    }
+
+    .container h2 {
+        font-weight: bold;
+        font-family: 'Monotype Corsiva';
+        color: #f33431;
+        text-align: center;
+        margin-top: 10px;
+    }
+
+    .hidden {
+        display: none;
+    }
+</style>
+{% endblock%}
+{% block body %}
+
+{% if page %}
+<div class="container">
+    <h2>Booking Details</h2>
+    <hr>
+    <table class="table table-hover">
+        <thead class="table-dark text-white">
+            <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Service Booked</th>
+                <th scope="col">Service Provider</th>
+                <th scope="col">View</th>
+                <th scope="col">Book Date</th>
+                <th scope="col">
+                    <center>Book Hours</center>
+                </th>
+                <th scope="col">
+                    <center>Book Days</center>
+                </th>
+                <th scope="col">Status</th>
+                <th scope="col">
+                    <center>Action</center>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books%}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{book.user.service.service_name}}</td>
+                <td>{{book.user.user.first_name}} {{book.user.user.last_name}}
+                </td>
+                <td><a href="{% url 'booking_status' book.id %}" class=" btn text-primary"><i class="fa fa-eye"></i></a>
+                </td>
+
+
+
+                <td>{{book.book_date}}</td>
+                <td>
+                    <center>{{book.book_days}} days</center>
+                </td>
+                <td>
+                    <center>{{book.book_hours}} hours</center>
+                </td>
+
+                {% if book.status.status == 'Accept' %}
+                <td>
+                    <span class="text-success">
+                        {{book.status.status}}ed
+                    </span>
+                </td>
+                {% elif book.status.status == 'Reject' %}
+                <td>
+                    <span class="text-danger">
+                        {{book.status.status}}ed
+                    </span>
+                </td>
+                {% else %}
+                <td>
+                    <span>{{book.status.status}}</span>
+                </td>
+                {% endif %}
+
+                {% if book.status.status == 'Accept' %}
+                <td style="font-weight:bold;color:blue">
+                    <center> Accepted</center>
+                </td>
+                {% else %}
+                <td>
+                    <a href="{% url 'cancel_booking' book.id %}">
+                        <center><button class="btn-sm btn-danger"
+                                onclick="return confirm('Do You wanna cancel the Booking?')">
+                                <i class="fa fa-trash"></i>
+                            </button></center>
+                    </a>
+                </td>
+                {% endif %}
+
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+
+
+</div>
+
+
+{% else%}
+
+<div class="container">
+    <h2>Booking Details</h2>
+    <hr>
+    <table class=" table table-hover">
+        <thead class="table-dark text-white">
+            <tr>
+                <th scope="col">S.No</th>
+                <th scope="col">Service Booked</th>
+                <th scope="col">Customer</th>
+                <th scope="col">Address</th>
+                <th scope="col">Book Date</th>
+                <th scope="col">Book Hours</th>
+                <th scope="col">Book Days</th>
+                <th scope="col">Status</th>
+                <th scope="col">Action</th>
+            </tr>
+        <tbody>
+            </thead>
+            {% for book in books%}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{book.user.service.service_name}}</td>
+                <td>{{book.customer.user.first_name}} {{book.customer.user.last_name}}
+                    <a href="{% url 'booking_status' book.id %}" class="rounded"><i class="fa fa-eye"></i></a>
+                </td>
+                <td>{{book.customer.address}}</td>
+                <td>{{book.book_date}}</td>
+                <td>{{book.book_hours}} hours</td>
+                <td>{{book.book_days}} days</td>
+
+
+                {% if book.status.status == 'Accept' %}
+                <td><span
+                        style="color:white;background:green;padding:0.2em 0.8em 0.2em 0.8em;border-radius:8%">{{book.status.status}}</span>
+                </td>
+                {% else %}
+                <td><span>{{book.status.status}}</span>
+                </td>
+                {% endif %}
+
+                {% if book.status.status == 'Accept' %}
+                <td style="font-weight:bold;color:rgb(2, 68, 11)">Accepted</td>
+
+                {% elif book.status.status == 'Reject' %}
+                <td style="font-weight:bold;color:rgb(255, 0, 0)">Rejected</td>
+
+                {% else %}
+                <td>
+                    <a href="{% url 'accept_confirmation' book.id %}">
+                        <button class="btn-sm btn-success"
+                            onclick="return confirm('Are You Confirm for Accept Order?')">
+                            <i class="fa fa-thumbs-up"></i>
+                        </button>
+                    </a>
+                    <a href="{% url 'spcancel_booking' book.id %}"><button class="btn-sm btn-danger"
+                            onclick="return confirm('Do You wanna cancel the Booking?')"><i
+                                class="fa fa-thumbs-down"></i></button></a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+
+
+</div>
+
+{% endif %}
+
+
+{% endblock %}
+
+{% block js %}
+
+
+
+
+{% endblock %}

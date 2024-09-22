@@ -1,0 +1,84 @@
+{% extends 'admin/admin_nav.html' %}
+
+{% block css%}
+<style>
+    .container {
+        height: 78vh;
+    }
+</style>
+{% endblock css %}
+
+{% block body %}
+
+
+<div class="container m-auto my-3 w-75 ">
+
+    {% if edit == 'profile' %}
+    <h2>Welcome {{user.first_name}} {{user.last_name}}, Please Update your profile</h2>
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="admin_username">Username</label>
+            <input type="text" class="form-control" id="admin_username" name="admin_username"
+                placeholder="Choose a unique username" value="{{user.username}}">
+        </div>
+        <div class="form-group my-2">
+            <div class="row">
+                <div class="col">
+                    <label for="a_fname">First Name</label>
+                    <input type="text" class="form-control" id="a_fname" name="a_fname" value="{{user.first_name}}"
+                        placeholder="Enter Your First Name">
+                </div>
+                <div class="col">
+                    <label for="a_lname">Last Name</label>
+                    <input type="text" class="form-control" id="a_lname" name="a_lname" value="{{user.last_name}}"
+                        placeholder="Enter Your Last Name">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="admin_email">Email address</label>
+            <input type="email" class="form-control" id="admin_email" name="admin_email" value="{{user.email}}"
+                placeholder="name@example.com">
+        </div>
+
+
+
+        <button type="submit" class="btn btn-outline-primary mt-2">Update</button>
+        <a href="{% url 'admin_profile' %}" class="btn btn-outline-danger mt-2">Cancel</a>
+    </form>
+
+    {% else %}
+    <h2>Welcome {{user.first_name}} {{user.last_name}}, Please Change your password</h2>
+    {% include 'messages.html' %}
+
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <div class="form-group my-2">
+
+            <label for="pw">Enter Old password</label>
+            <input type="password" class="form-control" id="pw" name="pw" placeholder="Your Old Password">
+        </div>
+        <div class="form-group my-2">
+
+            <label for="pw1">Enter New Password</label>
+            <input type="password" class="form-control" id="pw1" name="pw1" placeholder="Choose Your Password">
+        </div>
+        <div class="form-group my-2">
+
+
+            <label for="pw2">Confirm Password</label>
+            <input type="password" class="form-control" id="pw2" name="pw2" placeholder="Confirm Password">
+        </div>
+        <button type="submit" class="btn btn-outline-primary mt-2">Change Password</button>
+        <a href="{% url 'admin_profile' %}" class="btn btn-outline-danger mt-2">Cancel</a>
+
+    </form>
+    {% endif %}
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,132 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Roboto", sans-serif;
+    
+}
+body{
+    background-image: url('/static/img/bg.jpg');
+    overflow-x: hidden;
+}
+
+.admin_header{
+    position: fixed;
+    background: #22242a;
+    padding: 20px;
+    width: 100%;
+    height: 9vh;
+}
+
+.left_area h3 a{
+    color: #ccc;
+    text-transform: uppercase;
+    line-height: 1.56;
+    letter-spacing: 2px;
+    font-size: 22px;
+}
+
+.left_area span{
+    color: #1DC4E7;
+}
+
+.website{
+    text-decoration: none;
+    float: right;
+    margin-right: 25px;
+    margin-top: -6vh;
+    font-size: 15px;
+}
+
+.sidebar{
+    background: #2f323a;
+    margin-top: 9vh;
+    padding-top: 30px;
+    position: fixed;
+    left: 0;
+    width: 250px;
+    height: 100%;
+    transition: left 0.5s;
+}
+
+.sidebar .profile_img{
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    margin-bottom: 10px;
+
+}
+
+.sidebar h4{
+    color: #ccc;
+    margin-top: 0;
+    margin-bottom: 20px;
+
+}
+
+
+.sidebar a{
+    color: #fff;
+    display: block;
+    line-height: 50px;
+    width: 100%;
+    text-decoration: none;
+    padding-left: 35px;
+    transition: background 0.5s;
+
+}
+
+.sidebar a:hover{
+    background: #19BED3;
+
+}
+
+/* active class is for sidebar */
+.sidebar.active{
+    left: -200px;
+
+}
+.sidebar.active a span{
+    display: none;
+}
+
+.sidebar.active a{
+    font-size: 20px;
+    margin-left: 180px;
+    width: 70px;
+}
+/* End active */
+
+
+
+.sidebar i{
+    padding-right: 10px;
+}
+
+.burger{
+    z-index: 1;
+    color: #fff;
+    position: fixed;
+    cursor: pointer;
+    left: 240px;
+    font-size: 20px;
+    transition: color 0.5s;
+
+}
+
+.burger:hover{
+    color: #19BED3;
+}
+
+/* Content Menu */
+.content{
+    position: absolute;
+    top: 10vh;
+    z-index: -1;
+    width: 100%;
+    margin-left: 40px;
+    padding-left: 10px;
+
+}
+
+

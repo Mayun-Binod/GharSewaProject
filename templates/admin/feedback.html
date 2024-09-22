@@ -1,0 +1,54 @@
+{% extends 'admin/admin_nav.html' %}
+{% block css%}
+<style>
+    .container {
+        height: 75vh;
+    }
+</style>
+{% endblock css %}
+
+{% block body %}
+<div class="container my-4">
+    {% include 'messages.html' %}
+    <h2 class="text-center text-primary">Feedbacks</h2>
+    <hr>
+    <div>
+        <table class="table table-hover">
+            <thead class="table-dark text-white">
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Username</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone Number</th>
+                    <th scope="col">Issue</th>
+                    <th scope="col">Action</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for i in msg %}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{i.name}}</td>
+                    <td>{{i.email}}</td>
+                    <td>{{i.phone}}</td>
+                    <td>{{i.content}}</td>
+                    <td>
+                        <a href="{% url 'deleteFeedback' i.sno %}" class="m-1">
+                            <button class="btn-sm btn-danger"
+                                onclick="return confirm('Do you want to delete this feedback?')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </a>
+                    </td>
+                    
+                </tr>
+                {% endfor %}
+                <caption>*From Contact Form of GharSewa</caption>
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+{% block title %} {{service.service_name}} {% endblock title %}
+
+{% block css %}
+<style>
+    .container {
+        min-height: 75vh;
+    }
+</style>
+{% endblock css %}
+
+{% block body %}
+<div class="container-fluid">
+
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-4">
+
+                <div class="card">
+
+                    <div class="card-header">
+                        <h3 class="text-center">{{ service.service_name }}</h3>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <img src='/media/{{service.image}}' class="card-img-top" width="233px" height="80%">
+
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{ service.service_desc }}</p>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <h3>Available Users:: (Any One will contact you)</h3>
+
+                <div class="row mt-2">
+
+                    {% for user in users %}
+                    <div class="col-md-6">
+                        <div class="card card-body my-2">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <img src="{{user.image.url}}" class="image-thumbnail w-75 m-auto" alt="Photos">
+                                    <p class="text-center">@{{user.user.username}}</p>
+                                </div>
+                                <div class="col-md-8">
+                                    <h3>{{user.user.first_name}} {{user.user.last_name}}</h3>
+                                    <p>Email: {{user.user.email}}</p>
+                                    <p>Address: {{user.city.city}}</p>
+                                    <p>Contact: {{user.phone}}</p>
+                                    <p>Experience: {{user.experience}} years</p>
+
+                                    <p>
+                                        <a href="/media/service_man/certificate.png">Training Certificate</a>
+                                    </p>
+
+
+                                    <a href="{% url 'booking' user.user.id %}" class="btn btn-primary mt-2">Book Now</a>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    {% endfor %}
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock body %}

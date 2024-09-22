@@ -1,0 +1,66 @@
+{% extends 'admin/admin_nav.html' %}
+
+{% block css%}
+<style>
+    
+    .hidden {
+        display: none;
+    }
+    h2 {
+        text-shadow: 20px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        line-height: 1.65;
+        font-weight: bold;
+        font-family: monospace;
+        padding: 0.5rem;
+        text-align: center;
+        color: #414141;
+
+
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+<div class="container-fluid">
+    <div class="container my-4">
+        <h2>All Booking Status and Details</h2>
+        <hr>
+        <table class=" table table-hover">
+            <thead class="table-dark text-white">
+                <tr>
+                    <th scope="col">S.No</th>
+                    <th scope="col">Service Booked</th>
+                    <th scope="col">Customer</th>
+                    <th scope="col">Address</th>
+                    <th scope="col">Service Provider</th>
+
+                    <th scope="col">Book Date</th>
+                    <th scope="col">Book Days</th>
+                    <th scope="col">Book Hours</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for book in books%}
+                <tr>
+                    <th scope="row">{{forloop.counter}}</th>
+                    <td>{{book.user.service.service_name}}</td>
+                    <td>{{book.customer.user.first_name}} {{book.customer.user.last_name}}</td>
+                    <td>{{book.customer.address}}</td>
+                    <td>{{book.user.user.first_name}} {{book.user.user.last_name}}</td>
+                    <td>{{book.book_date}}</td>
+                    <td>{{book.book_days}} days</td>
+                    <td>{{book.book_hours}} hours</td>
+                    <td>{{book.status.status}}</td>
+                    
+                </tr>
+                {% endfor %}
+    
+            </tbody>
+        </table>
+    </div>
+    
+</div>
+{% endblock %}

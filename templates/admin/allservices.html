@@ -1,0 +1,75 @@
+{% extends 'admin/admin_nav.html' %}
+<style>
+    .image-thumbnail {
+        display: block;
+        height: 10vh;
+        max-width: 10vw;
+    }
+
+    img {
+        display: block;
+        height: 10vh;
+        max-width: 10vw;
+    }
+
+    .card-row {
+        justify-content: flex-start;
+    }
+</style>
+
+{% block body %}
+
+<div class="container mt-2">
+    <h2 class="text-center mb-3 text-primary">Our Services</h2>
+    <hr>
+    <div class="row">
+
+        <div class="col-md-10"> &nbsp;</div>
+        <div class="col-md-2">
+            <a href="{% url 'add_service' %}" class="btn btn-outline-primary mb-3">Add Service</a>
+        </div>
+
+    </div>
+    {% include '../messages.html' %}
+
+
+    <table class="table table-hover table-bordered">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">S.N.</th>
+                <th scope="col">Service Name</th>
+                <th scope="col">Image</th>
+                <th scope="col">Description</th>
+                <th scope="col" colspan="2">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in services %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td>{{i.service_name}}</td>
+                <td>
+                    <img src="{{i.image.url}}" width="123px" height="100px" class="image-thumbnail"
+                        alt="{{i.service_name}}">
+                </td>
+                <td>{{i.service_desc}}</td>
+                <td style="width:100px">
+                    <div class="d-flex mt-2">
+                        <a href="{% url 'editservices' i.service_id %}" class="m-1">
+                            <button class="btn btn-success"><i class="fa fa-edit"></i></button></a>
+                        <a href="{% url 'deleteService' i.service_id %}" class="m-1">
+                            <button class="btn btn-danger" onclick="return confirm('Are you sure?')">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </a>
+
+                    </div>
+                </td>
+
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}

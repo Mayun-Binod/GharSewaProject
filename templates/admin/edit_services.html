@@ -1,0 +1,64 @@
+{% extends 'admin/admin_nav.html' %}
+
+{% block css%}
+<style>
+    .container {
+        min-height: 80vh;
+    }
+</style>
+{% endblock %}
+
+{% block body %}
+
+
+<div class="container ">
+    <div class="my-3">
+        <h2>Update Service</h2>
+    </div>
+    <div>
+        <form action="" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% include '../messages.html' %}
+            <div class="form-group">
+                <label>Service Name</label>
+                <input type="text" class="form-control" value="{{ser.service_name}}" name="service_name"
+                    placeholder="Enter Service Name" required>
+            </div>
+
+            <div class="form-group my-2">
+                <label>Service Description</label>
+                <textarea name="service_desc" id="service_desc" cols="30" class="form-control" rows="10"
+                    placeholder="Service Description" required></textarea>
+            </div>
+
+            <div class="form-group my-2">
+                <div class="row">
+                    <div class="col-md-7">
+                        <input type="file" name="image" class="form-control"
+                            style="width:100%;padding:8px;margin-top:2%;border:1px solid lightgrey ">
+                    </div>
+                    <div class="col-md-5">
+                        <img src="{{ser.image.url}}" style="width:100%;height:120px">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group my-2">
+
+                <button type="submit" class="btn btn-primary" id="update">Update Service</button>
+
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block js %}
+
+<script>
+    document.getElementById('service_desc').onclick = function () {
+        document.getElementById('service_desc').innerHTML = '{{ser.service_desc}}';
+    }
+</script>
+
+{% endblock %}
