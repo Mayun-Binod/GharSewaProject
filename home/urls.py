@@ -70,12 +70,17 @@ urlpatterns = [
     path('accept_confirmation/<int:pid>', views.accept_confirmation, name='accept_confirmation'),
     
     # Customer Cancellation
+    path('edit_booking/<int:pid>',views.editBooking,name='edit_booking'),
     path('cancel_booking/<int:pid>', views.cancelBooking, name= 'cancel_booking'),
     
     # Service Provider Cancellations
     path('spcancel_booking/<int:pid>', views.spcancelBooking, name= 'spcancel_booking'),
     
     path('booking_status/<int:pid>', views.bookingStatus, name= 'booking_status'),
+    
+    # admit edit booking
+
+    # Other URL patterns...
 
     
 ]

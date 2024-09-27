@@ -1,6 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
+from django.shortcuts import get_object_or_404
+
+from .forms import BookingForm 
+from django.shortcuts import get_object_or_404
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
@@ -645,6 +649,21 @@ def cancelBooking(request, pid):
     ser = Booking.objects.get(id=pid)
     ser.delete()
     return redirect('booking_details')
+#customer edit booking
+@login_required(login_url='login')
+def editBooking(request, pid):
+    booking = get_object_or_404(Booking, id=pid)
+
+    if request.method == 'POST':
+        form = BookingForm(request.POST, instance=booking)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Booking updated successfully.")
+            return redirect('booking_details')  # Redirect to booking details page or another relevant page
+    else:
+        form = BookingForm(instance=booking)
+
+    return render(request, 'edit_booking.html', {'form': form})
 
 # Service Provider Cancelling Booking
 
@@ -827,3 +846,4 @@ def admin_home(request):
         return render(request, 'admin_home.html', context)
     else:
         return redirect('error')
+

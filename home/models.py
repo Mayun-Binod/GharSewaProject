@@ -90,3 +90,16 @@ class BookUpdate(models.Model):
 
     def __str__(self):
         return self.update_desc[0:30] + "...."
+
+# customer edit booking
+class Booking(models.Model):
+    status = models.ForeignKey(Status, on_delete=models.CASCADE, null=True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, null=True)
+    user = models.ForeignKey(Service_Man, on_delete=models.CASCADE, null=True)
+    service = models.ForeignKey(Service, on_delete=models.CASCADE, null=True)  # Add this field
+    book_date = models.DateField(null=True)
+    book_days = models.CharField(max_length=100, null=True)
+    book_hours = models.CharField(max_length=100, null=True)
+
+    def __str__(self) -> str:
+        return self.customer.user.first_name + " books " + self.user.user.first_name

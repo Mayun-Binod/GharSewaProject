@@ -90,6 +90,13 @@
                 </td>
                 {% else %}
                 <td>
+                    <a href="{% url 'edit_booking' book.id %}">
+                        <center><button class="btn-sm btn-warning">
+                            <i class="fa fa-edit"></i> Edit
+                        </button></center>
+                    </a>
+                </td>
+                <td>
                     <a href="{% url 'cancel_booking' book.id %}">
                         <center><button class="btn-sm btn-danger"
                                 onclick="return confirm('Do You wanna cancel the Booking?')">
